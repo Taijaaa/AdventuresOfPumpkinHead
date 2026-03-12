@@ -74,7 +74,7 @@ public class TrapDropPlatform : MonoBehaviour
 
         for (int i = 0; i < goblinsToSpawn; i++)
         {
-            Vector3 offset = new Vector3(Random.Range(-0.5f, 0.5f), 0.2f, 0f);
+            Vector3 offset = new Vector3(i * 0.8f - 0.8f, 0.2f, 0f);
             Instantiate(miniGoblinPrefab, spawnPoint.position + offset, Quaternion.identity);
         }
     }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MiniGoblinChase : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    public float moveSpeed = 1.6f;
 
     [Header("Edge Detection")]
     public Transform groundCheck;
