@@ -8,7 +8,7 @@ public class PumpkinSeedShooter : MonoBehaviour
     public float seedSpeed = 10f;
 
     [Header("Cooldown")]
-    public float shootCooldown = 1.5f;
+    public float shootCooldown = 1.2f;
     private float nextShootTime = 0f;
 
     private PlayerInventory inventory;

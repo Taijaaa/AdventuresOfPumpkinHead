@@ -1,16 +1,35 @@
 using UnityEngine;
 
-public class WitchBehaviouor : MonoBehaviour
+public class WitchBehaviour : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Transform player;
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+            if (playerObj != null)
+                player = playerObj.transform;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (player == null) return;
+
+        // Face the player
+        if (player.position.x > transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 }
