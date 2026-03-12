@@ -9,19 +9,38 @@ public class BatFlyAcross : MonoBehaviour
     private bool isFlying = false;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Collider2D col;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
 
         if (rb != null)
         {
-            rb.linearVelocity = Vector2.zero;
             rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.linearVelocity = Vector2.zero;
         }
 
-        // Face the correct direction
+        if (spriteRenderer != null)
+            spriteRenderer.enabled = false;
+
+        if (col != null)
+            col.enabled = false;
+    }
+
+    public void ActivateBat()
+    {
+        if (isFlying) return;
+        isFlying = true;
+
+        if (spriteRenderer != null)
+            spriteRenderer.enabled = true;
+
+        if (col != null)
+            col.enabled = true;
+
         if (spriteRenderer != null)
         {
             if (flyDirection.x < 0)
@@ -29,19 +48,9 @@ public class BatFlyAcross : MonoBehaviour
             else if (flyDirection.x > 0)
                 spriteRenderer.flipX = false;
         }
-    }
-
-    public void ActivateBat()
-    {
-        if (isFlying) return;
-
-        isFlying = true;
 
         if (rb != null)
-        {
-            rb.bodyType = RigidbodyType2D.Kinematic;
             rb.linearVelocity = flyDirection.normalized * flySpeed;
-        }
 
         Destroy(gameObject, destroyAfter);
     }

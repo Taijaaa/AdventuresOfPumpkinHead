@@ -5,15 +5,17 @@ public class PlayerDeathReset : MonoBehaviour
 {
     public float fallThreshold = -10f;
 
-    private Vector3 startingPosition;
-
     void Start()
     {
-        startingPosition = transform.position;
-
-        if (CheckpointManager.instance != null && CheckpointManager.instance.hasCheckpoint)
+        if (CheckpointManager.instance != null)
         {
-            transform.position = CheckpointManager.instance.currentCheckpoint;
+            if (CheckpointManager.instance.hasCheckpoint)
+            {
+                transform.position = CheckpointManager.instance.currentCheckpoint;
+            }
+
+            PlayerInventory inventory = GetComponent<PlayerInventory>();
+            CheckpointManager.instance.LoadInventory(inventory);
         }
     }
 

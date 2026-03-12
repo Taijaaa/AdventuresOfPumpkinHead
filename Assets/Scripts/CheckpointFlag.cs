@@ -6,12 +6,17 @@ public class CheckpointFlag : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!activated && other.CompareTag("Player"))
-        {
-            CheckpointManager.instance.SetCheckpoint(transform.position);
-            activated = true;
+        if (activated) return;
+        if (!other.CompareTag("Player")) return;
 
-            Debug.Log("Checkpoint activated at: " + transform.position);
+        PlayerInventory inventory = other.GetComponent<PlayerInventory>();
+
+        if (CheckpointManager.instance != null)
+        {
+            CheckpointManager.instance.SetCheckpoint(transform.position, inventory);
         }
+
+        activated = true;
+        Debug.Log("Checkpoint activated");
     }
 }
